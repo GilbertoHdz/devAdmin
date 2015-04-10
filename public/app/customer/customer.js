@@ -8,28 +8,43 @@ angular.module("devAdminApp")
       templateUrl: "/app/customer/customer.html",
       controller: "CustomerCtrl"
     })
-    .when('/customer/excel', {
-        templateUrl: 'app/customer/customer.html',
-        controller: 'CustomerCtrl',
-        resolve: {
-          customer: function(services, $route){
-            var customerID = $route.current.params.customerID;
-              if(customerID != 0){
-                return services.getCustomer(customerID);
-              } else {return ;}
-          }
-        }
-    })
+    //.when('/customer/excel', {
+    //    redirectTo: '/customer'
+    //})
     .otherwise({
-        redirectTo: '/'
+        redirectTo: '/customer'
     });
 })
-.controller("CustomerCtrl",function ($scope, $http){
+.controller("CustomerCtrl",function ($http, $scope, myService){
+  console.log(myService);
   $scope.message = "Customer Controller";
 
- 	$scope.excel = function() {
-	    $http.get('/customers/excel');
-	};
+  $scope.excel = function() {
+    console.log(myService.getExcel());
+      myService.getExcel();
+   //myService.getExcel().success(function(response) {            
+   //    console.log('True excel.');
+   //    console.log(response._data);
+   //}).error(function() {
+   //    console.log('Error excel.');
+   //});
 
+  };
 
-});
+})
+
+.service('myService', ['$http', function($http){
+  var _artist = 'Slash';
+  var obj = {};
+
+  obj.getArtist = function(){
+    return _artist;
+  }
+
+  obj.getExcel = function(){
+    return $http.get('customers/excel');
+  }
+
+  return obj;
+
+}]);
