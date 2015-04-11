@@ -31,7 +31,7 @@ exports.excel = function(req, res) {
 
   //return res.send(data); //si quiero que pare aquí
 
-  excelReport(template_file,data,function(error,binary){
+  excelReport(template_file, data, function(error,binary){
     if(error){
       res.writeHead(400, {'Content-Type': 'text/plain'});
       res.end(error);
@@ -40,7 +40,6 @@ exports.excel = function(req, res) {
     res.setHeader('Content-Type', 'application/vnd.openxmlformats');
     res.setHeader("Content-Disposition", "attachment; filename=Customer-"+Number(new Date())+".xlsx");
     res.end(binary, 'binary');
-    
   });
 
 };

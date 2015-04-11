@@ -20,14 +20,16 @@ angular.module("devAdminApp")
   $scope.message = "Customer Controller";
 
   $scope.excel = function() {
-    console.log(myService.getExcel());
-      myService.getExcel();
-   //myService.getExcel().success(function(response) {            
-   //    console.log('True excel.');
-   //    console.log(response._data);
-   //}).error(function() {
-   //    console.log('Error excel.');
-   //});
+    //myService.getExcel().success(function (data) {
+    //    console.log(data);
+    //}).error(function (data) {
+    //    //upload failed
+    //});
+
+  var pom = document.createElement('a'); 
+      pom.setAttribute('href', 'customers/excel'); 
+      pom.setAttribute('download', ''); //Colocar para que no aparesca esta leyenda en el consol "http://localhost:3000/customers/excel".
+      pom.click();
 
   };
 
