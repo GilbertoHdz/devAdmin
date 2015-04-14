@@ -5,11 +5,13 @@ var mongoose = require('mongoose'),
 
 var UserSchema = new Schema({
   name: String,
-  nik: String,
+  lastName: String,
+  rol: String,
+  email: String,
+  user: String,
   password: String,
-  f_ini: { type: Date, default: Date.now },
-  active: { type: Boolean, default: true }
-// hidden: { type: Boolean, default: false }
+  type: { type: String, default: 'user' },
+  active: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('User', UserSchema);
